@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+
+#nullable disable
+
+namespace AccesoDatos
+{
+    public partial class Usuario
+    {
+        public Usuario()
+        {
+            RolesUsuarios = new HashSet<RolesUsuario>();
+            SucursalesUsuarios = new HashSet<SucursalesUsuario>();
+        }
+
+        public int CodUsuario { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Nombres { get; set; }
+        public string Apellidos { get; set; }
+        public string Telefono { get; set; }
+        public string Direccion { get; set; }
+        public string Nit { get; set; }
+        public string Estado { get; set; }
+        public string Correo { get; set; }
+        public string UsuarioIng { get; set; }
+        public DateTime FechaIng { get; set; }
+        public string UsuarioAct { get; set; }
+        public DateTime? FechaAct { get; set; }
+
+        public virtual ICollection<RolesUsuario> RolesUsuarios { get; set; }
+        public virtual ICollection<SucursalesUsuario> SucursalesUsuarios { get; set; }
+    }
+}
