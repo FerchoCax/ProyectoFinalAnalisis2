@@ -40,6 +40,9 @@ namespace AccesoDatos
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.LogTo(Console.Write);
+            optionsBuilder.EnableSensitiveDataLogging();
+            //SavingChanges += ModelContext_SavingChanges;
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseMySQL("Server=localhost;Database=db_cinema;Uid=usr_cine;Pwd=Cine2022@;");

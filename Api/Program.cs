@@ -1,17 +1,54 @@
 using AccesoDatos;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Servicios.Interfaces;
+using Servicios.Servicios;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x =>
+{
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["JWTKey"]))
+    };
+    x.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            var accesToken = context.Request.Query["acces_token"];
+            var path = context.HttpContext.Request.Path;
+            if (!string.IsNullOrEmpty(accesToken))
+            {
+                context.Token = accesToken;
+            }
+            return Task.CompletedTask;
+        }
+
+    };
+});
 builder.Services.AddDbContext<DataBaseContext>((options) =>
 {
-
-});
+ });
+builder.Services.AddScoped<IJtAuth, Auth>();
+builder.Services.AddScoped<IUsuarios, Usuarios>();
+builder.Services.AddScoped<IClientes, Clientes>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -25,7 +25,7 @@ namespace AccesoDatos
         public string Correo { get; set; }
         public string UsuarioIng { get; set; }
         public DateTime FechaIng { get; set; }
-        public string UsuarioAct { get; set; }
+        public string? UsuarioAct { get; set; }
         public DateTime? FechaAct { get; set; }
 
         public virtual ICollection<RolesUsuario> RolesUsuarios { get; set; }
