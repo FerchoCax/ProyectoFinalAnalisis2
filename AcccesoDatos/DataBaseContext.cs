@@ -37,7 +37,7 @@ namespace AccesoDatos
         public virtual DbSet<TiposAsiento> TiposAsientos { get; set; }
         public virtual DbSet<TiposSala> TiposSalas { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
-
+        public virtual DbSet<ImagenPelicula> ImagenesPelicula { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.LogTo(Console.Write);
@@ -957,6 +957,66 @@ namespace AccesoDatos
                     .HasMaxLength(45)
                     .HasColumnName("usuario_ing");
             });
+
+
+            modelBuilder.Entity<ImagenPelicula>(entity =>
+            {
+                entity.HasKey(e => e.cod_imagen)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("imagenespeliculas");
+
+                entity.Property(e => e.cod_imagen).HasColumnName("cod_imagen");
+
+                
+                entity.Property(e => e.cod_pelicula)
+                    .HasMaxLength(500)
+                    .HasColumnName("cod_pelicula");
+
+                entity.Property(e => e.imagen)
+                .HasColumnType("LONGBLOB")
+                .HasColumnName("imagen");
+
+                entity.Property(e => e.tipo_imagen).HasColumnName("tipo_imagen");
+
+                entity.HasOne(d => d.codTipoImagenNavigator)
+                   .WithMany(p => p.Imagenes)
+                   .HasForeignKey(d => d.tipo_imagen)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_TIPO_IMG_IMAGENES");
+
+                entity.HasOne(d => d.codPeliculaNavigation)
+                   .WithMany(p => p.Imagenes)
+                   .HasForeignKey(d => d.cod_pelicula)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_COD_PELICULA_IMAGE");
+
+
+            });
+            modelBuilder.Entity<TipoImagen>(entity =>
+            {
+                entity.HasKey(e => e.cod_tipo_imagen)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("tipo_imagen");
+
+                entity.Property(e => e.cod_tipo_imagen).HasColumnName("cod_tipo_imagen");
+
+
+                entity.Property(e => e.nombre)
+                    .HasMaxLength(45)
+                    .HasColumnName("nombre");
+
+                entity.Property(e => e.fecha_ing).HasColumnName("fecha_ing");
+
+
+                entity.Property(e => e.usuario_ing)
+                    .HasMaxLength(45)
+                    .HasColumnName("usuario_ing");
+
+               
+            });
+
 
             OnModelCreatingPartial(modelBuilder);
         }
