@@ -43,9 +43,10 @@ namespace Servicios.Servicios
             string error = @". Error:  " + (e.InnerException != null ? e.InnerException.Message : e.Message) + @"".Replace("\\\\", "//");
             error = error + er;
             string retorno = @"{""error"": """ + mensaje + error.Replace("\"", "'")+ "\"}";
-            retorno = retorno.Replace("\\", "/"); 
-            
-            return new ObjectResult(JObject.Parse(retorno)) { StatusCode = 500 };
+            retorno = retorno.Replace("\\", "/");
+
+            JObject ObjectError = JObject.Parse(retorno);
+            return new ObjectResult(ObjectError) { StatusCode = 500 };
         }
 
         public ObjectResult respuestaDeError(string mensaje)

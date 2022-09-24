@@ -19,5 +19,11 @@ namespace Api.Controllers
         {
             return await _clientes.CrearCliente(cliente);
         }
+
+        [HttpGet("GetClientes")]
+        public async Task<IActionResult> GetCientes()
+        {
+            return await _clientes.GetClientes();
+        }
     }
 }

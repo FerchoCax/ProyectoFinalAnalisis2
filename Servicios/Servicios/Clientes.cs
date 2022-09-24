@@ -1,5 +1,6 @@
 ﻿using AccesoDatos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Servicios.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,17 @@ namespace Servicios.Servicios
             catch (Exception ex)
             {
                 return _error.respuestaDeError("Error el momento de crear el usuario", ex);
+            }
+        }
+
+        public async Task<IActionResult> GetClientes()
+        {
+            try
+            {
+                return new ObjectResult(await _context.Clientes.ToListAsync());
+            }catch(Exception ex)
+            {
+                return _error.respuestaDeError("Error al obtener el listado de clientes", ex);
             }
         }
 

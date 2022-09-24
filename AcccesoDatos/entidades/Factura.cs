@@ -18,6 +18,9 @@ namespace AccesoDatos
         public double Total { get; set; }
         public double Iva { get; set; }
         public string Estado { get; set; }
+        public int? IdPromocion { get; set; }
+        public int? CantidadPromociones { get; set; }
+        public double? DescuentoPromociones { get; set; }
         public string UsuarioIng { get; set; }
         public DateTime FechaIng { get; set; }
         public string UsuarioAct { get; set; }
@@ -25,6 +28,7 @@ namespace AccesoDatos
 
         public virtual Cliente CodClienteNavigation { get; set; }
         public virtual MetodosPago CodMetodoPagoNavigation { get; set; }
+        public virtual Promociones CodPromocionNavigation   { get; set; }
         public virtual ICollection<BoletosFactura> BoletosFacturas { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using Servicios.Interfaces;
 namespace Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("")]
     public class LoginController : Controller
     {
         private IJtAuth aut;
@@ -17,7 +17,7 @@ namespace Api.Controllers
             _context = ctx;
         }
 
-        [HttpPost]
+        [HttpPost("Login/{tipo}")]
         public IActionResult Login(Login login, string tipo)
         {
             LoginReturn user = aut.GetUser(login.username, login.password, tipo);

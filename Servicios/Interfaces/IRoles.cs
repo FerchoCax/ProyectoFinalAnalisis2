@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace Servicios.Interfaces
 {
-    public interface IClientes
+    public interface IRoles
     {
-        public Task<IActionResult> CrearCliente(Cliente cliente);
-        public Task<IActionResult> GetClientes();
+        public Task<IActionResult> CrearRol(Role rol);
+        public Task<IActionResult> GetRoles();
+        public Task<IActionResult> DesactivarRol(int idRol);
     }
 }

@@ -45,7 +45,7 @@ namespace AccesoDatos
             //SavingChanges += ModelContext_SavingChanges;
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySQL("Server=localhost;Database=db_cinema;Uid=usr_cine;Pwd=Cine2022@;");
+                optionsBuilder.UseMySQL("Server=34.71.210.170;Database=db_cinema;Uid=Fernando;Pwd=ferluan123;");
             }
         }
 
@@ -391,6 +391,13 @@ namespace AccesoDatos
                     .HasForeignKey(d => d.CodMetodoPago)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_METODO_PAGO_FACTURA");
+
+                entity.HasOne(d => d.CodPromocionNavigation)
+                .WithMany(p => p.Facturas)
+                .HasForeignKey(d => d.IdPromocion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_PROMOCION_FACTURA");
+
             });
 
             modelBuilder.Entity<Funcione>(entity =>
@@ -1016,6 +1023,44 @@ namespace AccesoDatos
 
                
             });
+
+            modelBuilder.Entity<Promociones>(entity =>
+            {
+                entity.HasKey(e => e.id_promocion)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("promociones");
+
+                entity.Property(e => e.id_promocion).HasColumnName("id_promocion");
+
+
+                entity.Property(e => e.nombre)
+                    .HasMaxLength(100)
+                    .HasColumnName("nombre");
+
+                entity.Property(e => e.descripcion)
+                    .HasMaxLength(500)
+                    .HasColumnName("descripcion");
+
+                entity.Property(e => e.estado)
+                    .HasMaxLength(1)
+                    .HasColumnName("estado");
+
+                entity.Property(e => e.fecha_ing).HasColumnName("fecha_ing");
+
+
+                entity.Property(e => e.usuario_ing)
+                    .HasMaxLength(45)
+                    .HasColumnName("usuario_ing");
+
+                entity.Property(e => e.usuario_act)
+                    .HasMaxLength(45)
+                    .HasColumnName("usuario_act");
+
+
+            });
+
+
 
 
             OnModelCreatingPartial(modelBuilder);
