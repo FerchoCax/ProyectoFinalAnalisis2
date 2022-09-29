@@ -16,8 +16,8 @@ namespace AccesoDatos
         public int CodDepartamento { get; set; }
         public string Nombre { get; set; }
         public string UsuarioIng { get; set; }
-        public DateTime FechaIng { get; set; }
-        public string UsuarioAct { get; set; }
+        public DateTime? FechaIng { get; set; }
+        public string? UsuarioAct { get; set; }
         public DateTime? FechaAct { get; set; }
 
         public virtual Departamento CodDepartamentoNavigation { get; set; }
