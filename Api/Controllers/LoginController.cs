@@ -29,9 +29,20 @@ namespace Api.Controllers
                     return Unauthorized();
                 }
                 user.token = token;
-                Usuario us = _context.Usuarios.Where(e => e.Username == login.username).First();
-                user.Nombres = us.Nombres;
-                user.apellidos = us.Apellidos;
+                if(tipo == "U")
+                {
+                    Usuario us = _context.Usuarios.Where(e => e.Username == login.username).First();
+                    user.Nombres = us.Nombres;
+                    user.apellidos = us.Apellidos;
+
+                }
+                else if(tipo == "C")
+                {
+                    Cliente cl = _context.Clientes.Where(e => e.Username == login.username).First();
+                    user.Nombres = cl.Nombres;
+                    user.apellidos = cl.Apellidos;
+                }
+                
                 user.tipo = tipo == "C" ? "CLIENTE" : tipo == "U" ? "USUARIO" : "";
                 return Ok(user);
             }
