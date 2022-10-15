@@ -442,6 +442,12 @@ namespace AccesoDatos
                     .HasForeignKey(d => d.CodSala)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SALA_FUNCION");
+
+                entity.HasOne(d => d.CodPeliculaNavigator)
+                  .WithMany(p => p.Funciones)
+                  .HasForeignKey(d => d.CodPelicula)
+                  .OnDelete(DeleteBehavior.ClientSetNull)
+                  .HasConstraintName("FK_PELICULA_FUNCION");
             });
 
             modelBuilder.Entity<MetodosPago>(entity =>

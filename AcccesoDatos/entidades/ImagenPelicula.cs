@@ -13,6 +13,9 @@ namespace AccesoDatos
         public int cod_imagen { get; set; }
         public int cod_pelicula { get; set; }
         public byte[] imagen { get; set; }
+        public string urlImagen { get; set; }
+        public string imagenbase64 { get; set; }
+        public string nombreimagen { get; set; }
         public int tipo_imagen { get; set; }
 
         public virtual TipoImagen codTipoImagenNavigator { get; set; }

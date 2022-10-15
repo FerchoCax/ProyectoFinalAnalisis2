@@ -55,6 +55,9 @@ builder.Services.AddScoped<IRolesUsuario, Servicios.Servicios.RolesUsuario>();
 builder.Services.AddScoped<IDepartamentosMunicipios, DepartamentosMunicipios>();
 builder.Services.AddScoped<ISucursal, Sucursales>();
 builder.Services.AddScoped<ISalas, Salas>();
+builder.Services.AddScoped<IImagenesPelicula, ImagenesPeliculas>();
+builder.Services.AddScoped<IFunciones, Funciones>();
+builder.Services.AddScoped<ICompras, Compras>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

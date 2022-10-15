@@ -41,9 +41,9 @@ namespace Servicios.Servicios
 
         private void CrearAsientosSala(Sala sala)
         {
-            string[] filasSalaGrande = { "A", "B", "C", "B", "D", "E", "F", "G", "H", "I" };
-            string[] filasSalaMediana = { "A", "B", "C", "B", "D", "E", "F", "G" };
-            string[] filasSalaPequenia = { "A", "B", "C", "B", "D", "E" };
+            string[] filasSalaGrande = { "A", "B", "C","D", "E", "F", "G", "H", "I" };
+            string[] filasSalaMediana = { "A", "B", "C","D", "E", "F", "G" };
+            string[] filasSalaPequenia = { "A", "B", "C", "D", "E" };
             var ultimaSala = _context.Salas.ToList();
             int NextSala = 1;
             if (ultimaSala.Count != 0)
