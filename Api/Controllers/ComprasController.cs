@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using AccesoDatos;
 using Servicios.Interfaces;
-
+using System.Net.Mail;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.IO;
 namespace Api.Controllers
 {
     [ApiController]
@@ -25,6 +28,24 @@ namespace Api.Controllers
         public async Task<IActionResult> GetAsientosSala(int idSala, int idFuncion)
         {
             return await _compras.GetAsientosSala(idSala, idFuncion);
+        }
+
+        [HttpPost("ComprarBoletos")]
+        public async Task<IActionResult> ComprarBoletos(TodoCompra compra)
+        {
+            return await _compras.ComprarBoletos(compra);
+        }
+
+        [HttpGet("GetInfoCliente")]
+        public async Task<IActionResult> GetInfoCliente(int idCliente)
+        {
+            return await _compras.GetInfoCliente(idCliente);
+        }
+
+        [HttpPost("ValidarBoleto")]
+        public async Task<IActionResult> ValidarBoleto(int idFuncion, int idBoleto)
+        {
+            return Ok(1);
         }
 
     }

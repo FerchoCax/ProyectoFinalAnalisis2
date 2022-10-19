@@ -12,7 +12,8 @@ namespace Servicios.Interfaces
     {
         public Task<IActionResult> GetPeliculasSucursal(int idSucursal);
         public Task<IActionResult> GetAsientosSala(int idSala, int idFuncion);
-
+        public Task<IActionResult> ComprarBoletos(TodoCompra compra);
+        public Task<IActionResult> GetInfoCliente(int idCliente);
 
     }
 }

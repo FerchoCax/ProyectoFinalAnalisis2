@@ -31,4 +31,10 @@ namespace AccesoDatos
         public virtual Promociones CodPromocionNavigation   { get; set; }
         public virtual ICollection<BoletosFactura> BoletosFacturas { get; set; }
     }
+
+    public partial class TodoCompra
+    {
+        public Boleto[] boletos { get; set; }
+        public Factura factura { get; set; }
+    }
 }

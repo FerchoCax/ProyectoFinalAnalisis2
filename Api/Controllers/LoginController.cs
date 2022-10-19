@@ -34,6 +34,7 @@ namespace Api.Controllers
                     Usuario us = _context.Usuarios.Where(e => e.Username == login.username).First();
                     user.Nombres = us.Nombres;
                     user.apellidos = us.Apellidos;
+                    user.codUser = us.CodUsuario;
 
                 }
                 else if(tipo == "C")
@@ -41,6 +42,7 @@ namespace Api.Controllers
                     Cliente cl = _context.Clientes.Where(e => e.Username == login.username).First();
                     user.Nombres = cl.Nombres;
                     user.apellidos = cl.Apellidos;
+                    user.codUser = cl.CodCliente;
                 }
                 
                 user.tipo = tipo == "C" ? "CLIENTE" : tipo == "U" ? "USUARIO" : "";
