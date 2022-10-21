@@ -65,7 +65,7 @@ namespace Servicios.Servicios
                 }
                 var Sala = await _dataBaseContext.Salas.Where(e => e.CodSala == idSala)
                            .Include(n => n.Asientos)
-                           .ThenInclude(m => m.Boletos.Where(g => codAsientos.Contains(g.CodAsiento))).FirstOrDefaultAsync();
+                           .ThenInclude(m => m.Boletos.Where(g => codAsientos.Contains(g.CodAsiento)&& g.CodFuncion == idFuncion )).FirstOrDefaultAsync();
 
 
                 return new ObjectResult(Sala) { StatusCode= 200};
@@ -203,9 +203,56 @@ namespace Servicios.Servicios
             try
             {
                 return new ObjectResult(await _dataBaseContext.Clientes.FirstOrDefaultAsync(e => e.CodCliente == idCliente)) { StatusCode = 200 };
-            }catch(Exception ex)
+            }
+            catch(Exception ex)
             {
                 return _errores.respuestaDeError("Error al momento de obtener la informacion del cliente", ex);
+            }
+        }
+
+        public async Task<IActionResult> ValidarBoleto(int codAsiento, int codFuncion)
+        {
+            try
+            {
+                var boleto = await _dataBaseContext.Boletos.Where(e => e.CodFuncion == codFuncion && e.CodAsiento == codAsiento).FirstOrDefaultAsync();
+                if(boleto == null)
+                {
+                    return _errores.respuestaDeError("No se ha encontrado el boleto en la basee de datos.");
+                }
+                if(boleto.Estado == "N")
+                {
+                    return _errores.respuestaDeError("El boleto ya ha sido utilizado");
+                }
+                boleto.Estado = "N";
+                _dataBaseContext.Entry(boleto).State = EntityState.Modified;
+                await _dataBaseContext.SaveChangesAsync();
+                return new ObjectResult(new { estado = 1 }) { StatusCode = 200 };
+
+            }
+            catch(Exception ex)
+            {
+                return _errores.respuestaDeError("Error al momento de validar el voleto", ex);
+            }
+        }
+
+        public async Task<IActionResult> GetInfoPeliculaFuncin(int idFuncion)
+        {
+            try
+            {
+                int[] funcion = { idFuncion };
+                var pelicula = await (from funciones in _dataBaseContext.Funciones
+                                      join peliculas in _dataBaseContext.Peliculas on funciones.CodPelicula equals peliculas.CodPelicula
+                                      where
+                                      funciones.CodFuncion == idFuncion
+                                      select peliculas)
+                                      .Include(e => e.CodClasificacionNavigation)
+                                      .Include(e => e.Funciones.Where(j => funcion.Contains(j.CodFuncion)))
+                                      .FirstOrDefaultAsync();
+                return new ObjectResult(pelicula) { StatusCode = 200 };
+            }
+            catch(Exception ex)
+            {
+                return _errores.respuestaDeError("Error al momento de obtener la informacion de la pelicula", ex);
             }
         }
     }

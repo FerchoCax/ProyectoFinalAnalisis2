@@ -43,9 +43,14 @@ namespace Api.Controllers
         }
 
         [HttpPost("ValidarBoleto")]
-        public async Task<IActionResult> ValidarBoleto(int idFuncion, int idBoleto)
+        public async Task<IActionResult> ValidarBoleto(int idFuncion,int idBoleto)
         {
-            return Ok(1);
+            return await _compras.ValidarBoleto(idBoleto, idFuncion);
+        }
+        [HttpGet("GetPeliculaFuncion")]
+        public async Task<IActionResult> GetPeliculaFuncion(int codFuncion)
+        {
+            return await _compras.GetInfoPeliculaFuncin(codFuncion);
         }
 
     }

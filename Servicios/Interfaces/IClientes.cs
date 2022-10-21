@@ -12,5 +12,6 @@ namespace Servicios.Interfaces
     {
         public Task<IActionResult> CrearCliente(Cliente cliente);
         public Task<IActionResult> GetClientes();
+        public Task<IActionResult> GetComprasCliente(int idCliente);
     }
 }
