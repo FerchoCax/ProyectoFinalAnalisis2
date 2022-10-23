@@ -13,7 +13,7 @@ namespace Api.Controllers
             _Pel = DM;
         }
 
-        [HttpGet("GetDepartamentos")]
+        [HttpGet("GetPeliculas")]
 
         public async Task<IActionResult> GetPeliculas()
         {
