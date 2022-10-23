@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using AccesoDatos;
 namespace Servicios.Interfaces
 {
-    public interface IPeliculas
+     public interface IPeliculas
     {
         Task<IActionResult> CrearPelicula(IPeliculas pelicula);
         Task<IActionResult> GetPeliculas();

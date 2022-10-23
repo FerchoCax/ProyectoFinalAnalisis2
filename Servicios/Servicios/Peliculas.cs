@@ -14,7 +14,7 @@ namespace Servicios.Servicios
 		private Errores _error;
 		public Peliculas(DataBaseContext ctx)
 		{
-			_context = ctx;
+			 _context = ctx;
 			_error = new Errores();
 		}
 
