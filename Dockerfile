@@ -57,20 +57,20 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["/Api/Api.csproj", "."]
-COPY ["/AcccesoDatos/AccesoDatos.csproj", "."]
-COPY ["/Servicios/Servicios.csproj", "."]
-COPY ["Google.Api.Gax.dll","."]
-COPY ["Google.Api.Gax.Rest.dll","."]
+COPY ["/Api/Api.csproj", "/prox/"]
+COPY ["/AcccesoDatos/AccesoDatos.csproj", "/prox/"]
+COPY ["/Servicios/Servicios.csproj", "/prox/"]
+COPY ["Google.Api.Gax.dll","/prox/"]
+COPY ["Google.Api.Gax.Rest.dll","/prox/"]
 COPY ["Google.Apis.Auth.dll",""]
-COPY ["Google.Apis.Auth.PlatformServices.dll","."]
-COPY ["Google.Apis.Core.dll","."]
-COPY ["Google.Apis.Storage.v1.dll","."]
-COPY ["Google.Cloud.Storage.V1.dll","."]
-COPY ["Google.Protobuf.dll","."]
+COPY ["Google.Apis.Auth.PlatformServices.dll","/prox/"]
+COPY ["Google.Apis.Core.dll","/prox/"]
+COPY ["Google.Apis.Storage.v1.dll","/prox/"]
+COPY ["Google.Cloud.Storage.V1.dll","/prox/"]
+COPY ["Google.Protobuf.dll","/prox/"]
 RUN dotnet restore "./Api.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/prox/"
 RUN dotnet build "Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
