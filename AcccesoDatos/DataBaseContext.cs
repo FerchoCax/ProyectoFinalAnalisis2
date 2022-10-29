@@ -64,7 +64,7 @@ namespace AccesoDatos
                 UserID = "Fernando",
                 Password = "ferluan123",
                 Database = "db_cinema",
-                //ConnectionProtocol = MySqlConnectionProtocol.UnixSocket
+                ConnectionProtocol = MySqlConnectionProtocol.UnixSocket
             };
             connectionString.Pooling = true;
             return connectionString;
