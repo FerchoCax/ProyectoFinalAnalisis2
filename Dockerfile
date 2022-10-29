@@ -70,7 +70,7 @@ COPY ["Google.Cloud.Storage.V1.dll","/prox/"]
 COPY ["Google.Protobuf.dll","/prox/"]
 RUN dotnet restore "/prox/Api.csproj"
 COPY . .
-WORKDIR "/src/prox/"
+WORKDIR "/src/prox"
 RUN dotnet build "Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
