@@ -68,7 +68,7 @@ COPY ["Google.Apis.Core.dll","/prox/"]
 COPY ["Google.Apis.Storage.v1.dll","/prox/"]
 COPY ["Google.Cloud.Storage.V1.dll","/prox/"]
 COPY ["Google.Protobuf.dll","/prox/"]
-RUN dotnet restore "./Api.csproj"
+RUN dotnet restore "/prox/Api.csproj"
 COPY . .
 WORKDIR "/src/prox/"
 RUN dotnet build "Api.csproj" -c Release -o /app/build
