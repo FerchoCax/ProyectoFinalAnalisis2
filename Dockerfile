@@ -60,6 +60,14 @@ WORKDIR /src
 COPY ["/Api/Api.csproj", "."]
 COPY ["/AcccesoDatos/AccesoDatos.csproj", "."]
 COPY ["/Servicios/Servicios.csproj", "."]
+COPY ["Google.Api.Gax.dll","."]
+COPY ["Google.Api.Gax.Rest.dll","."]
+COPY ["Google.Apis.Auth.dll",""]
+COPY ["Google.Apis.Auth.PlatformServices.dll","."]
+COPY ["Google.Apis.Core.dll","."]
+COPY ["Google.Apis.Storage.v1.dll","."]
+COPY ["Google.Cloud.Storage.V1.dll","."]
+COPY ["Google.Protobuf.dll","."]
 RUN dotnet restore "./Api.csproj"
 COPY . .
 WORKDIR "/src/."
