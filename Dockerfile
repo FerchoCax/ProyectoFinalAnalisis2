@@ -34,7 +34,7 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY Api.csproj, ./
+COPY Api.csproj ./
 RUN dotnet restore "./Api.csproj"
 COPY . .
 
