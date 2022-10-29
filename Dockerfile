@@ -57,17 +57,17 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["/Api/Api.csproj", "/prox/"]
-COPY ["/AcccesoDatos/AccesoDatos.csproj", "/prox/"]
-COPY ["/Servicios/Servicios.csproj", "/prox/"]
-COPY ["Google.Api.Gax.dll","/prox/"]
-COPY ["Google.Api.Gax.Rest.dll","/prox/"]
-COPY ["Google.Apis.Auth.dll",""]
-COPY ["Google.Apis.Auth.PlatformServices.dll","/prox/"]
-COPY ["Google.Apis.Core.dll","/prox/"]
-COPY ["Google.Apis.Storage.v1.dll","/prox/"]
-COPY ["Google.Cloud.Storage.V1.dll","/prox/"]
-COPY ["Google.Protobuf.dll","/prox/"]
+COPY ["/Api/Api.csproj", "/prox"]
+COPY ["/AcccesoDatos/AccesoDatos.csproj", "/prox"]
+COPY ["/Servicios/Servicios.csproj", "/prox"]
+COPY ["Google.Api.Gax.dll","/prox"]
+COPY ["Google.Api.Gax.Rest.dll","/prox"]
+COPY ["Google.Apis.Auth.dll","/prox"]
+COPY ["Google.Apis.Auth.PlatformServices.dll","/prox"]
+COPY ["Google.Apis.Core.dll","/prox"]
+COPY ["Google.Apis.Storage.v1.dll","/prox"]
+COPY ["Google.Cloud.Storage.V1.dll","/prox"]
+COPY ["Google.Protobuf.dll","/prox"]
 RUN dotnet restore "/prox/Api.csproj"
 COPY . .
 WORKDIR "/src/prox"
