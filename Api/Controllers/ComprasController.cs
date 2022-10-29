@@ -6,7 +6,8 @@ using System.Net.Mail;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
-namespace Api.Controllers
+
+namespace Apii.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -17,7 +18,7 @@ namespace Api.Controllers
         {
             _compras = cpm;
         }
-        
+
         [HttpGet("GetPeliculasSucursal")]
         public async Task<IActionResult> GetPeliculasSucursal(int id)
         {
@@ -43,7 +44,7 @@ namespace Api.Controllers
         }
 
         [HttpPost("ValidarBoleto")]
-        public async Task<IActionResult> ValidarBoleto(int idFuncion,int idBoleto)
+        public async Task<IActionResult> ValidarBoleto(int idFuncion, int idBoleto)
         {
             return await _compras.ValidarBoleto(idBoleto, idFuncion);
         }

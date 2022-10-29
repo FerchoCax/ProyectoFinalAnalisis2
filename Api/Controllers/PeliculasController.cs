@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Servicios.Interfaces;
 using AccesoDatos;
-namespace Api.Controllers
+
+namespace Apii.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -24,7 +25,7 @@ namespace Api.Controllers
         [HttpPost("CrearPelicula")]
         public async Task<IActionResult> CrearPelicula(Pelicula pel)
         {
-            return await _Pel.CrearPelicula(pel);   
+            return await _Pel.CrearPelicula(pel);
         }
     }
 }

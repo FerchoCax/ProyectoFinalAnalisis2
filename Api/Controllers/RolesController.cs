@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Servicios.Interfaces;
 
-namespace Api.Controllers
+namespace Apii.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -17,7 +17,7 @@ namespace Api.Controllers
         public async Task<IActionResult> CrearRol(Role rol)
         {
             return await _roles.CrearRol(rol);
-            
+
         }
         [HttpGet("GetRoles")]
         public async Task<IActionResult> GetRoles()
@@ -31,6 +31,6 @@ namespace Api.Controllers
             return await _roles.DesactivarRol(idRol);
         }
 
-        
+
     }
 }

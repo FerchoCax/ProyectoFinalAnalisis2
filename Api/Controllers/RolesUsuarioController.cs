@@ -1,7 +1,7 @@
 ﻿using AccesoDatos;
 using Microsoft.AspNetCore.Mvc;
 using Servicios.Interfaces;
-namespace Api.Controllers
+namespace Apii.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -27,7 +27,7 @@ namespace Api.Controllers
         [HttpPost("EliminarRolUsuario")]
         public async Task<IActionResult> EliminarRolUsuario(int idRol, int idUsuario)
         {
-            return await _rolesUsuario.EliminarRolUsuario(idRol,idUsuario);
+            return await _rolesUsuario.EliminarRolUsuario(idRol, idUsuario);
         }
 
     }

@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AccesoDatos;
 using Servicios.Interfaces;
-namespace Api.Controllers
+
+namespace Apii.Controllers
 {
     [ApiController]
     [Route("[controller]")]

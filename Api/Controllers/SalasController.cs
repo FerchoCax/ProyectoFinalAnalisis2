@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Servicios.Interfaces;
 using AccesoDatos;
-namespace Api.Controllers
+
+namespace Apii.Controllers
 {
     [ApiController]
     [Route("")]
@@ -11,11 +12,11 @@ namespace Api.Controllers
         private readonly ISalas _sala;
         public SalasController(ISalas sala)
         {
-            _sala=sala;
+            _sala = sala;
         }
-      
+
         [HttpPost("CrearSala")]
-        public async Task<IActionResult>CrearSala(Sala sala)
+        public async Task<IActionResult> CrearSala(Sala sala)
         {
             return await _sala.CrearSala(sala);
         }

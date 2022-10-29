@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Servicios.Interfaces;
 
-namespace Api.Controllers
+namespace Apii.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -31,7 +31,7 @@ namespace Api.Controllers
             return await _clientes.GetComprasCliente(idCliente);
         }
 
-       
+
 
     }
 }
