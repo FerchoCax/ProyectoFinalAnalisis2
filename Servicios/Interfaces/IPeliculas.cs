@@ -9,7 +9,7 @@ namespace Servicios.Interfaces
 {
      public interface IPeliculas
     {
-        Task<IActionResult> CrearPelicula(IPeliculas pelicula);
+        Task<IActionResult> CrearPelicula(Pelicula pelicula);
         Task<IActionResult> GetPeliculas();
     }
 }

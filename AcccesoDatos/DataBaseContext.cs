@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using MySql.Data.MySqlClient;
 
 #nullable disable
 
@@ -47,10 +48,25 @@ namespace AccesoDatos
             //SavingChanges += ModelContext_SavingChanges;
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySQL("Server=34.71.210.170;Database=db_cinema;Uid=Fernando;Pwd=ferluan123;");
+                MySqlConnectionStringBuilder conn = ConectionStringBuilder();
+                optionsBuilder.UseMySQL(conn.ToString());
             }
         }
 
+        public static MySqlConnectionStringBuilder ConectionStringBuilder()
+        {
+            var connectionString = new MySqlConnectionStringBuilder()
+            {
+                SslMode = MySqlSslMode.Disabled,
+                Server = Environment.GetEnvironmentVariable("cloudsql/fluent-observer-362922:us-central1:db-proyecto-analisis2"), // e.g. '/cloudsql/project:region:instance'
+                UserID = Environment.GetEnvironmentVariable("Fernando"),   // e.g. 'my-db-user
+                Password = Environment.GetEnvironmentVariable("ferluan123"), // e.g. 'my-db-password'
+                Database = Environment.GetEnvironmentVariable("db_cinema"), // e.g. 'my-database'
+                ConnectionProtocol = MySqlConnectionProtocol.UnixSocket
+            };
+            connectionString.Pooling = true;
+            return connectionString;
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
