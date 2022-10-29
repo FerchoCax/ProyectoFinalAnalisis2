@@ -15,6 +15,7 @@ namespace AccesoDatos.entidades
     public partial class LoginReturn
     {
         public string username { get; set; }
+        public decimal codUser { get; set; }
         public string[] roles { get; set; }
         public string token { get; set; } 
         public string?  Nombres { get; set; }

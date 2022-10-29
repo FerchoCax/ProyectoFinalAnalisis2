@@ -5,12 +5,13 @@ using Servicios.Interfaces;
 using Servicios.Servicios;
 using System.Text;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+using Microsoft.AspNetCore.DataProtection;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication(x =>
@@ -47,6 +48,7 @@ builder.Services.AddAuthentication(x =>
 builder.Services.AddDbContext<DataBaseContext>((options) =>
 {
  });
+builder.Services.AddDataProtection();
 builder.Services.AddScoped<IJtAuth, Auth>();
 builder.Services.AddScoped<IUsuarios, Usuarios>();
 builder.Services.AddScoped<IClientes, Clientes>();
@@ -54,6 +56,12 @@ builder.Services.AddScoped<IRoles, Roles>();
 builder.Services.AddScoped<IRolesUsuario, Servicios.Servicios.RolesUsuario>();
 builder.Services.AddScoped<IDepartamentosMunicipios, DepartamentosMunicipios>();
 builder.Services.AddScoped<ISucursal, Sucursales>();
+builder.Services.AddScoped<ISalas, Salas>();
+builder.Services.AddScoped<IImagenesPelicula, ImagenesPeliculas>();
+builder.Services.AddScoped<IFunciones, Funciones>();
+builder.Services.AddScoped<ICompras, Compras>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -72,5 +80,14 @@ app.UseCors(x => x
              .AllowCredentials());
 app.UseAuthorization();
 app.MapControllers();
-
+app.UseRouting();
+ app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGet("/hola", async context =>
+                {
+                    await context.Response.WriteAsync("Version 0.1");
+                });
+                endpoints.MapControllers();//.RequireAuthorization();
+                // endpoints.MapHub<OrdenesMedicasHub>("/hub/OrdenesMedicas");
+            });
 app.Run();

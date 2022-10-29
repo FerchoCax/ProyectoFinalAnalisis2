@@ -25,5 +25,13 @@ namespace Api.Controllers
         {
             return await _clientes.GetClientes();
         }
+        [HttpGet("GetComprasCliente")]
+        public async Task<IActionResult> GetComprasCliente(int idCliente)
+        {
+            return await _clientes.GetComprasCliente(idCliente);
+        }
+
+       
+
     }
 }

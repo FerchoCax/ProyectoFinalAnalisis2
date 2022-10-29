@@ -48,6 +48,23 @@ namespace Servicios.Servicios
             }
         }
 
+        public async Task<IActionResult> GetComprasCliente(int idCliente)
+        {
+            try
+            {
+                var compras = await _context.Facturas.Where(e => e.CodCliente == idCliente)
+                                    .Include(n => n.BoletosFacturas)
+                                    .ThenInclude(m => m.CodBoletoNavigation)
+                                    .ThenInclude(e => e.CodFuncionNavigation)
+                                    .AsNoTracking()
+                                    .ToListAsync();
+                return new ObjectResult(compras) { StatusCode = 200 };
+            }catch(Exception ex)
+            {
+                return _error.respuestaDeError("Error al momento de obtener el historial de compras del cliente", ex);
+            }
+        }
+
 
     }
 }
