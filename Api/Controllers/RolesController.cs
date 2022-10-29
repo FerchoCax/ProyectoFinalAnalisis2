@@ -30,5 +30,7 @@ namespace Api.Controllers
         {
             return await _roles.DesactivarRol(idRol);
         }
+
+        
     }
 }

@@ -11,6 +11,7 @@ namespace AccesoDatos
         public Pelicula()
         {
             Imagenes = new HashSet<ImagenPelicula>();
+            Funciones = new HashSet<Funcione>();
         }
         public int CodPelicula { get; set; }
         public int CodClasificacion { get; set; }
@@ -27,5 +28,6 @@ namespace AccesoDatos
         public virtual ClasificacionPelicula CodClasificacionNavigation { get; set; }
 
         public virtual ICollection<ImagenPelicula> Imagenes { get; set; }
+        public virtual ICollection<Funcione> Funciones { get; set; } 
     }
 }

@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace Servicios.Interfaces
 {
-    public interface IClientes
+    public interface ISalas
     {
-        public Task<IActionResult> CrearCliente(Cliente cliente);
-        public Task<IActionResult> GetClientes();
-        public Task<IActionResult> GetComprasCliente(int idCliente);
+        public Task<IActionResult> CrearSala(Sala sala);
+        public Task<IActionResult> ListarSalasSucursal(int idSucursal);
     }
 }

@@ -38,6 +38,8 @@ namespace AccesoDatos
         public virtual DbSet<TiposSala> TiposSalas { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<ImagenPelicula> ImagenesPelicula { get; set; }
+        public virtual DbSet<ValorEntero> valorEntero { get; set; }
+        public virtual DbSet<ValorString> valorString { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.LogTo(Console.Write);
@@ -51,6 +53,25 @@ namespace AccesoDatos
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<ValorEntero>(entity =>
+            {
+                entity.HasNoKey();
+                
+                entity.Property(e => e.valor).HasColumnName("valor");
+
+                
+            });
+
+            modelBuilder.Entity<ValorString>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.valor).HasColumnName("valor");
+
+
+            });
+
             modelBuilder.Entity<Asiento>(entity =>
             {
                 entity.HasKey(e => e.CodAsiento)
@@ -370,6 +391,9 @@ namespace AccesoDatos
                 entity.Property(e => e.Iva).HasColumnName("iva");
 
                 entity.Property(e => e.Total).HasColumnName("total");
+                entity.Property(e => e.IdPromocion).HasColumnName("id_promocion");
+                entity.Property(e => e.CantidadPromociones).HasColumnName("cantidad_promociones");
+                entity.Property(e => e.DescuentoPromociones).HasColumnName("descuento_promocion");
 
                 entity.Property(e => e.UsuarioAct)
                     .HasMaxLength(45)
@@ -442,6 +466,12 @@ namespace AccesoDatos
                     .HasForeignKey(d => d.CodSala)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SALA_FUNCION");
+
+                entity.HasOne(d => d.CodPeliculaNavigator)
+                  .WithMany(p => p.Funciones)
+                  .HasForeignKey(d => d.CodPelicula)
+                  .OnDelete(DeleteBehavior.ClientSetNull)
+                  .HasConstraintName("FK_PELICULA_FUNCION");
             });
 
             modelBuilder.Entity<MetodosPago>(entity =>

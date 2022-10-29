@@ -25,5 +25,7 @@ namespace AccesoDatos
 
         public virtual Sala CodSalaNavigation { get; set; }
         public virtual ICollection<Boleto> Boletos { get; set; }
+
+        public virtual Pelicula CodPeliculaNavigator { get; set; }
     }
 }
