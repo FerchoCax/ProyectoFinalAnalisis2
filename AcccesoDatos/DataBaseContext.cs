@@ -12,7 +12,7 @@ namespace AccesoDatos
         public DataBaseContext()
         {
         }
-
+        public string conexionString = "";
         public DataBaseContext(DbContextOptions<DataBaseContext> options)
             : base(options)
         {
@@ -50,6 +50,7 @@ namespace AccesoDatos
             {
                 MySqlConnectionStringBuilder conn = ConectionStringBuilder();
                 string prueba = conn.ConnectionString;
+                conexionString = prueba;
                 optionsBuilder.UseMySQL(prueba);
             }
         }
@@ -63,7 +64,7 @@ namespace AccesoDatos
                 UserID = "Fernando",
                 Password = "ferluan123",
                 Database = "db_cinema",
-                ConnectionProtocol = MySqlConnectionProtocol.UnixSocket
+                //ConnectionProtocol = MySqlConnectionProtocol.UnixSocket
             };
             connectionString.Pooling = true;
             return connectionString;

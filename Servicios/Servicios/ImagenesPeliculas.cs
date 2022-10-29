@@ -83,7 +83,7 @@ namespace Servicios.Servicios
                     .ThenInclude(n => n.codTipoImagenNavigator).ToListAsync());
             }catch(Exception ex)
             {
-                return _errores.respuestaDeError("Error al momento de listar las peliculas",ex);
+                return _errores.respuestaDeError("Error al momento de listar las peliculas" + _dataBaseContext.conexionString,ex);
             }
         }
     }
