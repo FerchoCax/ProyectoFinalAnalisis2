@@ -30,5 +30,8 @@ namespace Api.Controllers
         {
             return await _clientes.GetComprasCliente(idCliente);
         }
+
+       
+
     }
 }

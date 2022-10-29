@@ -1,6 +1,7 @@
 ﻿using AccesoDatos;
 using AccesoDatos.entidades;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Servicios.Interfaces;
 
 namespace Api.Controllers
@@ -24,12 +25,12 @@ namespace Api.Controllers
             if (!user.username.Equals(null))
             {
                 var token = aut.Autentication(login.username, login.password, tipo);
-                if(token == null)
+                if (token == null)
                 {
                     return Unauthorized();
                 }
                 user.token = token;
-                if(tipo == "U")
+                if (tipo == "U")
                 {
                     Usuario us = _context.Usuarios.Where(e => e.Username == login.username).First();
                     user.Nombres = us.Nombres;
@@ -37,19 +38,27 @@ namespace Api.Controllers
                     user.codUser = us.CodUsuario;
 
                 }
-                else if(tipo == "C")
+                else if (tipo == "C")
                 {
                     Cliente cl = _context.Clientes.Where(e => e.Username == login.username).First();
                     user.Nombres = cl.Nombres;
                     user.apellidos = cl.Apellidos;
                     user.codUser = cl.CodCliente;
                 }
-                
+
                 user.tipo = tipo == "C" ? "CLIENTE" : tipo == "U" ? "USUARIO" : "";
                 return Ok(user);
             }
             return Unauthorized();
         }
-        
+
+        [HttpGet("Prueba")]
+        public IActionResult Prueba()
+        {
+            var r = _context.valorString.FromSqlRaw("select curdate() as valor").FirstOrDefault();
+            return Ok(r);
+
+        }
+
     }
 }

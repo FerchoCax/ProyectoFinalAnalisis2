@@ -10,4 +10,8 @@ namespace AccesoDatos
         public int valor { get; set; }
 
     }
+    public partial class ValorString
+    {
+        public string valor { get; set; }
+    }
 }

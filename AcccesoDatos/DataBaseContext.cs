@@ -39,6 +39,7 @@ namespace AccesoDatos
         public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<ImagenPelicula> ImagenesPelicula { get; set; }
         public virtual DbSet<ValorEntero> valorEntero { get; set; }
+        public virtual DbSet<ValorString> valorString { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.LogTo(Console.Write);
@@ -61,6 +62,16 @@ namespace AccesoDatos
 
                 
             });
+
+            modelBuilder.Entity<ValorString>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.valor).HasColumnName("valor");
+
+
+            });
+
             modelBuilder.Entity<Asiento>(entity =>
             {
                 entity.HasKey(e => e.CodAsiento)
