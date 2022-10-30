@@ -53,14 +53,14 @@ namespace AccesoDatos
                 conexionString = prueba;
                 optionsBuilder.UseMySQL(prueba);
             }
-        }
+        }-
 
         public static MySqlConnectionStringBuilder ConectionStringBuilder()
         {
             var connectionString = new MySqlConnectionStringBuilder()
             {
                 SslMode = MySqlSslMode.None,
-                Server = "cloudsql/fluent-observer-362922:us-central1:db-proyecto-analisis2",
+                Server = "/cloudsql/fluent-observer-362922:us-central1:db-proyecto-analisis2",
                 UserID = "Fernando",
                 Password = "ferluan123",
                 Database = "db_cinema",
