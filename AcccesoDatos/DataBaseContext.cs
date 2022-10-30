@@ -49,9 +49,7 @@ namespace AccesoDatos
             if (!optionsBuilder.IsConfigured)
             {
                 MySqlConnectionStringBuilder conn = ConectionStringBuilder();
-                string prueba = conn.ConnectionString;
-                conexionString = prueba;
-                optionsBuilder.UseMySQL(prueba);
+                optionsBuilder.UseMySQL(conn.ConnectionString);
             }
         }
 
