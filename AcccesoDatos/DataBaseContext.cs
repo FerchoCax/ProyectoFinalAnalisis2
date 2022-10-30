@@ -45,7 +45,7 @@ namespace AccesoDatos
         {
             optionsBuilder.LogTo(Console.Write);
             optionsBuilder.EnableSensitiveDataLogging();
-            //SavingChanges += ModelContext_SavingChanges;
+
             if (!optionsBuilder.IsConfigured)
             {
                 MySqlConnectionStringBuilder conn = ConectionStringBuilder();
@@ -62,7 +62,7 @@ namespace AccesoDatos
                 UserID = "Fernando",
                 Password = "ferluan123",
                 Database = "db_cinema",
-                ConnectionProtocol = MySqlConnectionProtocol.UnixSocket
+                //ConnectionProtocol = MySqlConnectionProtocol.UnixSocket
             };
             connectionString.Pooling = true;
             return connectionString;
