@@ -49,7 +49,9 @@ namespace AccesoDatos
             if (!optionsBuilder.IsConfigured)
             {
                 MySqlConnectionStringBuilder conn = ConectionStringBuilder();
-                optionsBuilder.UseMySQL(conn.ConnectionString);
+                conexionString = conn.ConnectionString;
+                string str = conn.ConnectionString;
+                optionsBuilder.UseMySQL(str);
             }
         }
 
@@ -62,7 +64,7 @@ namespace AccesoDatos
                 UserID = "Fernando",
                 Password = "ferluan123",
                 Database = "db_cinema",
-                //ConnectionProtocol = MySqlConnectionProtocol.UnixSocket
+                ConnectionProtocol = MySqlConnectionProtocol.UnixSocket
             };
             connectionString.Pooling = true;
             return connectionString;
