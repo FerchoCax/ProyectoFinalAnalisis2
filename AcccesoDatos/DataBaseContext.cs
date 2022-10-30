@@ -53,7 +53,7 @@ namespace AccesoDatos
                 conexionString = prueba;
                 optionsBuilder.UseMySQL(prueba);
             }
-        }-
+        }
 
         public static MySqlConnectionStringBuilder ConectionStringBuilder()
         {
