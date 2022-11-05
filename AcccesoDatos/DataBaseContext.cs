@@ -48,26 +48,8 @@ namespace AccesoDatos
 
             if (!optionsBuilder.IsConfigured)
             {
-                MySqlConnectionStringBuilder conn = ConectionStringBuilder();
-                conexionString = conn.ConnectionString;
-                string str = conn.ConnectionString;
-                optionsBuilder.UseMySQL(str);
+                optionsBuilder.UseMySQL("Server=desaweb.mysql.database.azure.com;Database=db_cinema;Uid=fernando;Pwd=M@rceline12;");
             }
-        }
-
-        public static MySqlConnectionStringBuilder ConectionStringBuilder()
-        {
-            var connectionString = new MySqlConnectionStringBuilder()
-            {
-                SslMode = MySqlSslMode.None,
-                Server = "/cloudsql/fluent-observer-362922:us-central1:db-proyecto-analisis2",
-                UserID = "Fernando",
-                Password = "ferluan123",
-                Database = "db_cinema",
-                ConnectionProtocol = MySqlConnectionProtocol.UnixSocket
-            };
-            connectionString.Pooling = true;
-            return connectionString;
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

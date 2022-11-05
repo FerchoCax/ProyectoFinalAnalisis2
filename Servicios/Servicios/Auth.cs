@@ -1,4 +1,4 @@
-﻿using AccesoDatos;
+using AccesoDatos;
 using AccesoDatos.entidades;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -75,7 +75,23 @@ namespace Servicios.Servicios
         {
             if (ValidateUser(usuario, password,tipo))
             {
-                string[] rolList = { };
+                List<string> rolList = new List<string>();
+                if(tipo == "U")
+                {
+                    var user = _context.Usuarios.Where(u => u.Username == usuario).FirstOrDefault();
+
+                    var roless =  (from roles in _context.Roles
+                                  join rolesUser in _context.RolesUsuarios on roles.ColRol equals rolesUser.CodRol
+                                  where 
+                                  rolesUser.CodUsuario == user.CodUsuario
+                                  select
+                                    roles
+                                  ).ToList() ;
+                    foreach (var role in roless)
+                    {
+                        rolList.Add(role.NombreRol);
+                    }
+                }
                 return new LoginReturn { roles = rolList, username = usuario };
             }
             else

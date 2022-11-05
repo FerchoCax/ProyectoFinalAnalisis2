@@ -16,7 +16,7 @@ namespace AccesoDatos.entidades
     {
         public string username { get; set; }
         public decimal codUser { get; set; }
-        public string[] roles { get; set; }
+        public List<string> roles { get; set; }
         public string token { get; set; } 
         public string?  Nombres { get; set; }
         public string? apellidos { get; set; }

@@ -202,7 +202,14 @@ namespace Servicios.Servicios
         {
             try
             {
-                return new ObjectResult(await _dataBaseContext.Clientes.FirstOrDefaultAsync(e => e.CodCliente == idCliente)) { StatusCode = 200 };
+                var x = await _dataBaseContext.Clientes.Where(e => e.CodCliente == idCliente)
+                                .Include(n => n.Facturas)
+                                .ThenInclude(m => m.BoletosFacturas)
+                                .ThenInclude(r => r.CodBoletoNavigation)
+                                .ThenInclude(j => j.CodFuncionNavigation)
+                                .ThenInclude(o => o.CodPeliculaNavigator)
+                                .FirstOrDefaultAsync();
+                return new ObjectResult(x){ StatusCode = 200 };
             }
             catch(Exception ex)
             {
